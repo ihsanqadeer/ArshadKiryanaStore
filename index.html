@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arshad Kiryana Store | Premium Online Grocery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #0f172a; --accent: #fbbf24; --bg: #f8fafc; --whatsapp: #25d366; --text-dark: #1e293b; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--bg); color: var(--text-dark); line-height: 1.6; }
+
+        /* Floating WhatsApp Button */
+        .float-wa { position: fixed; bottom: 85px; right: 20px; background: var(--whatsapp); color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); z-index: 9999; text-decoration: none; border: 2px solid white; transition: 0.3s; }
+        .float-wa:hover { transform: scale(1.1); }
+
+        /* Al Fatah Style Top Bar */
+        .top-bar { background: var(--primary); color: white; padding: 10px 20px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .top-bar .contact { font-weight: 600; color: var(--accent); }
+
+        /* Sticky Header */
+        header { background: white; padding: 15px 20px; position: sticky; top: 0; z-index: 2000; box-shadow: 0 2px 15px rgba(0,0,0,0.1); border-bottom: 3px solid var(--accent); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .logo span { color: var(--accent); }
+
+        /* Category Chips (Mobile Friendly) */
+        .categories { background: white; padding: 10px 0; overflow-x: auto; white-space: nowrap; text-align: center; border-bottom: 1px solid #eee; }
+        .chip { display: inline-block; padding: 8px 20px; margin: 0 5px; background: #f1f5f9; border-radius: 25px; text-decoration: none; color: var(--text-dark); font-size: 13px; font-weight: 600; transition: 0.3s; }
+        .chip:hover { background: var(--accent); color: var(--primary); }
+
+        /* Banner Slider */
+        .slider { width: 100%; height: 400px; overflow: hidden; position: relative; }
+        .slides { display: flex; width: 400%; height: 100%; animation: slide 15s infinite ease-in-out; }
+        .slide { width: 100%; height: 100%; background-size: cover; background-position: center; position: relative; display: flex; align-items: center; justify-content: center; }
+        .slide-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.7), transparent); }
+        .slide-text { position: relative; z-index: 10; color: white; max-width: 600px; padding: 20px; text-align: left; left: -10%; }
+        .slide h2 { font-size: 3rem; margin: 0; line-height: 1.1; }
+        .slide p { font-size: 1.2rem; color: var(--accent); }
+
+        @keyframes slide {
+            0%, 20% { transform: translateX(0); }
+            25%, 45% { transform: translateX(-25%); }
+            50%, 70% { transform: translateX(-50%); }
+            75%, 95% { transform: translateX(-75%); }
+        }
+
+        /* Features/Badges Section */
+        .features { display: flex; justify-content: space-around; padding: 30px 20px; background: white; margin: 20px 0; flex-wrap: wrap; gap: 20px; }
+        .feature-box { text-align: center; max-width: 200px; }
+        .feature-box i { font-size: 30px; color: var(--accent); display: block; margin-bottom: 10px; }
+        .feature-box h4 { margin: 0; font-size: 14px; }
+
+        /* Products Grid */
+        .section-title { padding: 0 20px; max-width: 1200px; margin: 40px auto 20px; display: flex; justify-content: space-between; align-items: center; }
+        .grid { max-width: 1200px; margin: 0 auto 50px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+        .product-card { background: white; border-radius: 12px; padding: 15px; transition: 0.3s; border: 1px solid #eee; position: relative; }
+        .product-card:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-color: var(--accent); }
+        .product-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+        .product-card h3 { font-size: 16px; margin: 10px 0; color: var(--primary); }
+        .price { font-weight: 700; color: #e11d48; font-size: 18px; display: block; margin-bottom: 15px; }
+        .add-btn { background: var(--primary); color: white; text-decoration: none; display: block; text-align: center; padding: 10px; border-radius: 6px; font-weight: 600; font-size: 14px; transition: 0.3s; }
+        .add-btn:hover { background: var(--accent); color: var(--primary); }
+
+        /* Team Section Al Fatah Style */
+        .md-section { background: white; padding: 60px 20px; margin-top: 40px; }
+        .md-card { max-width: 800px; margin: 0 auto; display: flex; align-items: center; gap: 30px; background: var(--bg); padding: 30px; border-radius: 20px; border-left: 8px solid var(--accent); }
+        .md-card img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; }
+
+        /* Footer */
+        footer { background: var(--primary); color: white; padding: 60px 20px; text-align: center; }
+
+        @media (max-width: 768px) {
+            .slide-text { left: 0; text-align: center; }
+            .slide h2 { font-size: 2rem; }
+            .md-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <div>Welcome to <b>Arshad Kiryana Store</b> Online</div>
+    <div class="contact">📞 0320 6337396</div>
+</div>
+
+<header>
+    <div class="nav-container">
+        <a href="#" class="logo">ARSHAD <span>KIRYANA</span></a>
+        <div style="font-size: 20px;">🔍</div>
+    </div>
+</header>
+
+<div class="categories">
+    <a href="#rice" class="chip">Rice Varieties</a>
+    <a href="#pulses" class="chip">Pulses (Daalein)</a>
+    <a href="#dryfruit" class="chip">Dry Fruits</a>
+    <a href="#spices" class="chip">Besan & Flour</a>
+    <a href="#offers" class="chip">Today's Deals</a>
+</div>
+
+<div class="slider">
+    <div class="slides">
+        <div class="slide" style="background-image: url('https://i.ibb.co/DHwCBDv1/image.jpg')">
+            <div class="slide-overlay"></div>
+            <div class="slide-text">
+                <p>Welcome to Our Store</p>
+                <h2>Muhammad Suleman</h2>
+                <p>Managing Director - Narowal Branch</p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://i.ibb.co/23RC2vwj/image.jpg')">
+            <div class="slide-overlay"></div>
+            <div class="slide-text">
+                <h2>Special Daal Chana</h2>
+                <p>100% Organic & Cleaned by Hand</p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://i.ibb.co/nMb1Rn0L/image.jpg')">
+            <div class="slide-overlay"></div>
+            <div class="slide-text">
+                <h2>Premium Daal Mash</h2>
+                <p>Export Quality White Pulses</p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1586201375761-83865001e31c?w=1200')">
+            <div class="slide-overlay"></div>
+            <div class="slide-text">
+                <h2>Super Kernel Rice</h2>
+                <p>Aromatic Long Grain Rice</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="features">
+    <div class="feature-box"><span>🛡️</span><h4>100% Pure</h4><p style="font-size: 10px;">Khalis ki mukammal guarantee</p></div>
+    <div class="feature-box"><span>🚚</span><h4>Fast Delivery</h4><p style="font-size: 10px;">Orders delivered in Narowal</p></div>
+    <div class="feature-box"><span>💰</span><h4>Best Prices</h4><p style="font-size: 10px;">Market se behtar rate</p></div>
+</div>
+
+<div class="section-title">
+    <h2>All Products</h2>
+    <a href="#" style="color: var(--accent); font-size: 14px;">View All ></a>
+</div>
+
+<div class="grid">
+    <div class="product-card" id="rice">
+        <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400" alt="Rice">
+        <h3>Super Kernel Basmati</h3>
+        <span class="price">Rs. 320/kg</span>
+        <a href="https://wa.me/923206337396?text=Order: Super Kernel Rice" class="add-btn">Add to Cart</a>
+    </div>
+    <div class="product-card" id="pulses">
+        <img src="https://i.ibb.co/23RC2vwj/image.jpg" alt="Dal Chana">
+        <h3>Special Daal Chana</h3>
+        <span class="price">Rs. 240/kg</span>
+        <a href="https://wa.me/923206337396?text=Order: Daal Chana" class="add-btn">Add to Cart</a>
+    </div>
+    <div class="product-card">
+        <img src="https://i.ibb.co/nMb1Rn0L/image.jpg" alt="Dal Mash">
+        <h3>Premium Daal Mash</h3>
+        <span class="price">Rs. 480/kg</span>
+        <a href="https://wa.me/923206337396?text=Order: Daal Mash" class="add-btn">Add to Cart</a>
+    </div>
+    <div class="product-card" id="dryfruit">
+        <img src="https://images.unsplash.com/photo-1508061461508-cb18c242f556?w=400" alt="Almonds">
+        <h3>American Badam Giri</h3>
+        <span class="price">Rs. 1800/kg</span>
+        <a href="https://wa.me/923206337396?text=Order: Badam" class="add-btn">Add to Cart</a>
+    </div>
+</div>
+
+<div class="md-section">
+    <div class="md-card">
+        <img src="https://i.ibb.co/DHwCBDv1/image.jpg" alt="Suleman">
+        <div>
+            <h2 style="margin:0; color: var(--primary);">Muhammad Suleman</h2>
+            <p style="color: var(--accent); font-weight: 700; margin-bottom: 15px;">Managing Director</p>
+            <p>"Arshad Kiryana Store dunya bhar ki khalis kiryana items aap ki dehleez par puhanchane ka azam rakhta hai. Hamari priority meyar aur aap ka bharosa hai."</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <h2>Arshad Kiryana Store</h2>
+    <p>Eid Ghah Road, Narowal, Pakistan</p>
+    <p>📞 0320 6337396 | 📧 sulem79284@gmail.com</p>
+    <div style="margin-top: 30px; font-size: 12px; opacity: 0.5;">© 2026 Arshad Kiryana Store - Powered by Narowal Tech</div>
+</footer>
+
+<a href="https://wa.me/923206337396" class="float-wa">📲</a>
+
+</body>
+</html>
